@@ -1,7 +1,8 @@
 import {Link, useParams} from "react-router-dom";
 
+
 function SingleTypePage() {
-    const {pokemon,pokemonType} = useParams()
+    const { pokemon, pokemonType } = useParams<{ pokemonType: string; pokemon?: string }>();
 
     return (
         <>
