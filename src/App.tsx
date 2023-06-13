@@ -1,7 +1,6 @@
 import {createBrowserRouter, createRoutesFromElements, Route, Link, RouterProvider, Outlet  } from 'react-router-dom'
 import './App.css'
 import Home from "./pages/Home";
-import SinglePokemonPage from "./pages/SinglePokemonPage";
 import SingleTypePage from "./pages/SingleTypePage";
 import Breadcrumbs from "./components/Breadcrumbs";
 
