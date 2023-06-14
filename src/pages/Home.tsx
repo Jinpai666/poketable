@@ -1,15 +1,17 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import getPokemonGenerations from "../services/getPokemonGenerations";
-import { DataFromApi } from "../types/DataFromApiType"
 
+type GenerationData = {
+    name: string;
+}
 
 function Home() {
-    const [generations, setGenerations] = useState<DataFromApi[]>([]);
+    const [generations, setGenerations] = useState<GenerationData[]>([]);
 
     useEffect(() => {
         getPokemonGenerations().then((result) =>
-            setGenerations(result?.data.results as DataFromApi[])
+            setGenerations(result?.data.results as GenerationData[])
         );
     }, []);
 
