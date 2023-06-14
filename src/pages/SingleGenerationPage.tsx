@@ -1,13 +1,18 @@
-import {Fragment} from 'react'
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState, useMemo } from "react";
+import {Fragment} from "react";
+import {Link, useParams, useNavigate} from "react-router-dom";
+import {useEffect, useState, useMemo} from "react";
 import getSingleGeneration from "../services/getSingleGeneration";
-import { Pokemon } from "../types/pokemonType";
+import {Pokemon} from "../types/pokemonType";
 
 function SingleGenerationPage() {
+    let navigate = useNavigate();
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-    const { generation, pokemon } = useParams<{ generation: string; pokemon?: string }>();
+    const {generation, pokemon} =
+        useParams<{ generation: string; pokemon?: string }>();
 
+    const handleOnClick = (redirectTarget: string) => {
+        navigate(`/${generation}/${redirectTarget}`);
+    };
     useEffect(() => {
         const fetchData = async () => {
             const data = await getSingleGeneration(generation);
@@ -32,20 +37,17 @@ function SingleGenerationPage() {
                     </thead>
                     <tbody>
                     {pokemons.map((singlePokemon) => (
-                            <Fragment key={singlePokemon.id} >
-                                <tr >
-                                    <td>
-                                        <Link to={`/${generation}/${singlePokemon.name}`}>
-                                            {singlePokemon.name}
-                                        </Link>
-                                    </td>
-                                    <td>{singlePokemon.id}</td>
-                                    <td>
-                                        <img src={singlePokemon.image} alt="pokemon image" />
-                                    </td>
-                                    <td>{singlePokemon.types}</td>
-                                </tr>
-                                {pokemon === singlePokemon.name && <tr>
+                        <Fragment key={singlePokemon.id}>
+                            <tr onClick={() => handleOnClick(singlePokemon.name)}>
+                                <td>{singlePokemon.name}</td>
+                                <td>{singlePokemon.id}</td>
+                                <td>
+                                    <img src={singlePokemon.image} alt="pokemon image"/>
+                                </td>
+                                <td>{singlePokemon.types}</td>
+                            </tr>
+                            {pokemon === singlePokemon.name && (
+                                <tr>
                                     <td>
                                         <table>
                                             <thead>
@@ -66,11 +68,9 @@ function SingleGenerationPage() {
                                             </tbody>
                                         </table>
                                     </td>
-
-                                </tr>}
-                            </Fragment>
-
-
+                                </tr>
+                            )}
+                        </Fragment>
                     ))}
                     </tbody>
                 </table>
