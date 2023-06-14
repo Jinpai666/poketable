@@ -48,7 +48,7 @@ function SingleGenerationPage() {
                             </tr>
                             {pokemon === singlePokemon.name && (
                                 <tr>
-                                    <td>
+                                    <td colSpan={4}>
                                         <table>
                                             <thead>
                                             <tr>
