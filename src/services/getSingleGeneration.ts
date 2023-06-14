@@ -35,6 +35,7 @@ const getSingleGeneration = async (generation?: string): Promise<Pokemon[]> => {
             image: result.sprites.front_default,
             types: result.types.map((type: any) => type.type.name).join(", "),
         }));
+        pokemons.sort((a, b) => a.id - b.id);
         return pokemons;
     } catch (error) {
         console.error("Error fetching data:", error);
