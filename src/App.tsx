@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import SingleTypePage from "./pages/SingleTypePage";
+import SingleGenerationPage from "./pages/SingleGenerationPage";
 import Breadcrumbs from "./components/Breadcrumbs";
 
 const Root = () => {
@@ -28,7 +28,7 @@ const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root/>}>
             <Route index element={<Home/>}/>
-            <Route path={":pokemonType/:pokemon?"} element={<SingleTypePage/>}/>
+            <Route path={":generation/:pokemon?"} element={<SingleGenerationPage/>}/>
         </Route>
     )
 );

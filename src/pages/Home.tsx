@@ -1,18 +1,15 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import getPokemonTypes from "../services/getTypes";
+import getPokemonGenerations from "../services/getPokemonGenerations";
+import { DataFromApi } from "../types/DataFromApiType"
 
-type SingleType = {
-    name: string;
-    url: string;
-};
 
 function Home() {
-    const [types, setTypes] = useState<SingleType[]>([]);
+    const [generations, setGenerations] = useState<DataFromApi[]>([]);
 
     useEffect(() => {
-        getPokemonTypes().then((result) =>
-            setTypes(result?.data.results as SingleType[])
+        getPokemonGenerations().then((result) =>
+            setGenerations(result?.data.results as DataFromApi[])
         );
     }, []);
 
@@ -20,16 +17,21 @@ function Home() {
         <div>
             <h1>Choose pokemon type:</h1>
             <ul>
-                {types.map((type) => (
-                    <li>
-                        <Link key={type.name} to={`/${type.name}`}>
-                            {type.name}
-                        </Link>
-                    </li>
-                ))}
+                {generations.map((generation, idx) => {
+                    const romanNumeral = generation.name.replace('generation-', '').toUpperCase();
+                    const generationName = generation.name.replace('-', ' ').replace('g', 'G').slice(0,10);
+                    const formattedName = `${generationName} ${romanNumeral}`;
+
+                    return (
+                        <li key={idx}>
+                            <Link to={`/${idx+1}`}>
+                                {formattedName}
+                            </Link>
+                        </li>
+                    );
+                })}
             </ul>
 
-            <button onClick={() => console.log("types", types)}>test</button>
         </div>
     );
 }

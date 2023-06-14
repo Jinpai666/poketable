@@ -1,14 +1,14 @@
 import {useParams, Link} from "react-router-dom";
 
 function Breadcrumbs() {
-    const {pokemon, pokemonType} =
-        useParams<{ pokemonType?: string; pokemon?: string }>();
+    const {pokemon, generation} =
+        useParams<{ generation?: string; pokemon?: string }>();
 
     return (
         <div style={{display: "flex"}}>
             <Link to="/">home</Link>
-            {pokemonType && <Link to={`${pokemonType}`}>/{pokemonType}</Link>}
-            {pokemon && <Link to={`${pokemon}`}>/{pokemon}</Link>}
+            {generation && <Link to={`${generation}`}>/generation-{generation}</Link>}
+            {pokemon && <Link to={`${generation}/${pokemon}`}>/{pokemon}</Link>}
         </div>
     );
 }
