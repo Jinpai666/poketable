@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import axios, { AxiosResponse } from "axios";
 import { Pokemon } from "../types/pokemonType"
 
@@ -14,7 +15,10 @@ type PokemonData = {
     }[];
 };
 
-const getSingleGeneration = async (generation?: string): Promise<Pokemon[]> => {
+const getSingleGeneration = async (
+    setLoading: Dispatch<SetStateAction<boolean>>,
+    generation?: string
+): Promise<Pokemon[]> => {
     try {
         const promises: Promise<PokemonData>[] = [];
         const response = await axios.get(`https://pokeapi.co/api/v2/generation/${generation}`);
@@ -23,8 +27,8 @@ const getSingleGeneration = async (generation?: string): Promise<Pokemon[]> => {
         for (const item of data) {
             promises.push(
                 axios
-                    .get(item.url.replace("pokemon-species", "pokemon"))
-                    .then((res: AxiosResponse<any>) => res.data)
+                    .get<PokemonData>(item.url.replace("pokemon-species", "pokemon"))
+                    .then((res: AxiosResponse<PokemonData>) => res.data)
             );
         }
 
@@ -33,9 +37,10 @@ const getSingleGeneration = async (generation?: string): Promise<Pokemon[]> => {
             name: result.name,
             id: result.id,
             image: result.sprites.front_default,
-            types: result.types.map((type: any) => type.type.name).join(", "),
+            types: result.types.map((type) => type.type.name).join(", "),
         }));
         pokemons.sort((a, b) => a.id - b.id);
+        setLoading(false)
         return pokemons;
     } catch (error) {
         console.error("Error fetching data:", error);

@@ -3,10 +3,15 @@ import {Link, useParams, useNavigate} from "react-router-dom";
 import {useEffect, useState, useMemo} from "react";
 import getSingleGeneration from "../services/getSingleGeneration";
 import {Pokemon} from "../types/pokemonType";
+import LoadingIndicator from "../components/LoadingIndicator"
+
 
 function SingleGenerationPage() {
+
     let navigate = useNavigate();
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const [loading, setLoading] = useState(true)
+
     const {generation, pokemon} =
         useParams<{ generation: string; pokemon?: string }>();
 
@@ -14,17 +19,18 @@ function SingleGenerationPage() {
         navigate(`/${generation}/${redirectTarget}`);
     };
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await getSingleGeneration(generation);
+        const fetchData = async (setLoading : React.Dispatch<React.SetStateAction<boolean>>) => {
+            const data = await getSingleGeneration(setLoading, generation );
             setPokemons(data);
         };
-        fetchData();
+        fetchData(setLoading);
     }, [generation]);
 
     return (
         <>
-            <div>
-                <button onClick={() => console.log(pokemons)}>test</button>
+            {loading
+                ? <LoadingIndicator/>
+                : <div>
                 <div>Generation {generation}</div>
                 <table>
                     <thead>
@@ -74,7 +80,7 @@ function SingleGenerationPage() {
                     ))}
                     </tbody>
                 </table>
-            </div>
+            </div>}
         </>
     );
 }
