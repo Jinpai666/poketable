@@ -1,10 +1,10 @@
 import {Fragment} from "react";
 import {Link, useParams, useNavigate} from "react-router-dom";
 import {useEffect, useState, useMemo} from "react";
-import getSingleGeneration from "../services/getSingleGeneration";
-import {Pokemon} from "../types/pokemonType";
-import LoadingIndicator from "../components/LoadingIndicator"
-
+import getSingleGeneration from "../../services/getSingleGeneration";
+import {Pokemon} from "../../types/pokemonType";
+import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator"
+import "./singleGenerationPage.scss"
 
 function SingleGenerationPage() {
 
@@ -32,25 +32,25 @@ function SingleGenerationPage() {
                 ? <LoadingIndicator/>
                 : <div>
                 <div>Generation {generation}</div>
-                <table>
+                <table className="table">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Types</th>
+                        <th className="table__cell">Name</th>
+                        <th className="table__cell">ID</th>
+                        <th className="table__cell">Image</th>
+                        <th className="table__cell">Types</th>
                     </tr>
                     </thead>
                     <tbody>
                     {pokemons.map((singlePokemon) => (
                         <Fragment key={singlePokemon.id}>
                             <tr onClick={() => handleOnClick(singlePokemon.name)}>
-                                <td>{singlePokemon.name}</td>
-                                <td>{singlePokemon.id}</td>
-                                <td>
+                                <td className="table__cell">{singlePokemon.name}</td>
+                                <td className="table__cell">{singlePokemon.id}</td>
+                                <td className="table__cell">
                                     <img src={singlePokemon.image} alt="pokemon image"/>
                                 </td>
-                                <td>{singlePokemon.types}</td>
+                                <td className="table__cell">{singlePokemon.types}</td>
                             </tr>
                             {pokemon === singlePokemon.name && (
                                 <tr>

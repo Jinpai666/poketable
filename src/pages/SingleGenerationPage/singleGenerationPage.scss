@@ -1,0 +1,14 @@
+.table {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 740px;
+  &__cell{
+    border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 50px;
+    @media(max-width:480px) {
+      min-width: unset;
+    }
+  }
+}

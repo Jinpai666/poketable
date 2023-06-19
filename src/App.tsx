@@ -6,9 +6,8 @@ import {
     RouterProvider,
     Outlet,
 } from "react-router-dom";
-import "./App.css";
 import Home from "./pages/Home";
-import SingleGenerationPage from "./pages/SingleGenerationPage";
+import SingleGenerationPage from "./pages/SingleGenerationPage/SingleGenerationPage";
 import Breadcrumbs from "./components/Breadcrumbs";
 
 const Root = () => {
