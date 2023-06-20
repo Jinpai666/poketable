@@ -2,6 +2,6 @@
 
 ## Scroll through various generations of pokemon. Check pokemon details.
 
-### Live: https://poketable.netlify.app/
+### :globe_with_meridians: Live: https://poketable.netlify.app/
 
 ### To run locally : npm run dev
