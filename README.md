@@ -1,4 +1,4 @@
-# poketable
+# Poketable
 
 ## Scroll through various generations of pokemon. Check pokemon details.
 
