@@ -3,7 +3,7 @@ import "./breadcrumbs.scss";
 
 function Breadcrumbs() {
     const {pokemon, generation} =
-        useParams<{ generation?: string; pokemon?: string }>();
+        useParams<{ generation?: string; singlePokemon?: string }>();
 
     return (
         <div className="breadcrumbs">
@@ -16,7 +16,7 @@ function Breadcrumbs() {
                 </Link>
             )}
             {pokemon && (
-                <Link className="breadcrumbs__link" to={`${generation}/${pokemon}`}>
+                <Link className="breadcrumbs__link" to={`${generation}/${singlePokemon}`}>
                     /{pokemon}
                 </Link>
             )}
