@@ -12,14 +12,14 @@ import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
 
 const Root = () => {
     return (
-        <>
+        <div className="container">
             <div>
                 <Breadcrumbs/>
             </div>
             <div>
                 <Outlet/>
             </div>
-        </>
+        </div>
     );
 };
 
