@@ -2,8 +2,8 @@ import {useParams, Link} from "react-router-dom";
 import "./breadcrumbs.scss";
 
 function Breadcrumbs() {
-    const {singlePokemon, generation} =
-        useParams<{ generation?: string; singlePokemon?: string }>();
+    const {chosenPokemon, generation} =
+        useParams<{ generation?: string; chosenPokemon?: string }>();
 
     return (
         <div className="breadcrumbs">
@@ -15,9 +15,9 @@ function Breadcrumbs() {
                     /generation-{generation}
                 </Link>
             )}
-            {singlePokemon && (
-                <Link className="breadcrumbs__link" to={`${generation}/${singlePokemon}`}>
-                    /{singlePokemon}
+            {chosenPokemon && (
+                <Link className="breadcrumbs__link" to={`${generation}/${chosenPokemon}`}>
+                    /{chosenPokemon}
                 </Link>
             )}
         </div>
