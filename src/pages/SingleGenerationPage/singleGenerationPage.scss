@@ -1,8 +1,34 @@
+.generationPage{
+  padding: 10px;
+}
+.generationNumber{
+  font-family: 'Roboto', sans-serif;
+  color: #c62828;
+  padding-top: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
 .table {
   font-family: 'Roboto', sans-serif;
   width: 100%;
   margin: 0 auto;
   max-width: 740px;
+  &__head{
+    background-color: #ef5350;
+  }
+  &__row{
+    background-color: #fff;
+  }
+  &__row_selected {
+    background-color: #eee;
+    border: 2px solid  #ef5350;
+  }
+  &__cell_head{
+   padding: 10px 0;
+    font-weight: 600;
+    font-size: 18px;
+  }
   &__cell{
     border: 1px solid;
     text-align: center;
@@ -11,5 +37,26 @@
     @media(max-width:480px) {
       min-width: unset;
     }
+  }
+  &__details{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px 0;
+
+  }
+  &__image{
+    height: 200px;
+    @media(max-width:480px) {
+      height: 100px;
+    }
+  }
+  &__detail{
+    font-weight: 600;
+    padding-bottom: 10px;
+  }
+  &__detail-number{
+    font-weight: 400;
+    padding-bottom: 10px;
   }
 }
