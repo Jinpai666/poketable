@@ -2,7 +2,7 @@ import {useParams, Link} from "react-router-dom";
 import "./breadcrumbs.scss";
 
 function Breadcrumbs() {
-    const {pokemon, generation} =
+    const {singlePokemon, generation} =
         useParams<{ generation?: string; singlePokemon?: string }>();
 
     return (
