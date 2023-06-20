@@ -61,7 +61,7 @@ function SingleGenerationPage() {
                                     </td>
                                     <td className="table__cell">{singlePokemon.id}</td>
                                     <td className="table__cell">
-                                        <img src={singlePokemon.image} alt="pokemon image"/>
+                                        <img loading="lazy" src={singlePokemon.image} alt="pokemon image"/>
                                     </td>
                                     <td className="table__cell">{singlePokemon.types}</td>
                                 </tr>
@@ -70,6 +70,7 @@ function SingleGenerationPage() {
                                         <td colSpan={4}>
                                             <div className="table__details">
                                                 <img
+                                                    loading="lazy"
                                                     className="table__image"
                                                     src={singlePokemon.artwork}
                                                     alt="pokemon image"
