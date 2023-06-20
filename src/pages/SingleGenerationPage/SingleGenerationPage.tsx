@@ -3,8 +3,8 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import getSingleGeneration from "../../services/getSingleGeneration";
 import { Pokemon } from "../../types/pokemonType";
 import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
-import "./singleGenerationPage.scss";
 import BackToTop from "../../components/BackToTop/BackToTop";
+import "./singleGenerationPage.scss";
 
 function SingleGenerationPage() {
     const navigate = useNavigate();
