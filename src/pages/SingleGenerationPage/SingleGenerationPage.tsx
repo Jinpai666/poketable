@@ -5,6 +5,7 @@ import getSingleGeneration from "../../services/getSingleGeneration";
 import {Pokemon} from "../../types/pokemonType";
 import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
 import "./singleGenerationPage.scss";
+import BackToTop from "../../components/BackToTop/BackToTop"
 
 function SingleGenerationPage() {
     let navigate = useNavigate();
@@ -121,6 +122,7 @@ function SingleGenerationPage() {
                     </table>
                 </div>
             )}
+            <BackToTop/>
         </div>
     );
 }
