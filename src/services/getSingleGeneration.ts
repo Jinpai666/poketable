@@ -43,7 +43,7 @@ const getSingleGeneration = async (
         }
 
         const results = await Promise.all(promises);
-        const pokemons: Pokemon[] = results.map((result) => ({
+        const pokemon: Pokemon[] = results.map((result) => ({
             name: result.name,
             id: result.id,
             image: result.sprites.front_default,
@@ -56,9 +56,9 @@ const getSingleGeneration = async (
             specialDefense: result.stats[4].base_stat,
             speed: result.stats[5].base_stat,
         }));
-        pokemons.sort((a, b) => a.id - b.id);
+        pokemon.sort((a, b) => a.id - b.id);
         setLoading(false);
-        return pokemons;
+        return pokemon;
     } catch (error) {
         console.error("Error fetching data:", error);
         return [];

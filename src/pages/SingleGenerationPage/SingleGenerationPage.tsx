@@ -1,31 +1,33 @@
-import {Fragment} from "react";
-import {Link, useParams, useNavigate} from "react-router-dom";
-import {useEffect, useState, useMemo} from "react";
+import { Fragment, useEffect, useMemo, useState, useRef } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import getSingleGeneration from "../../services/getSingleGeneration";
-import {Pokemon} from "../../types/pokemonType";
+import { Pokemon } from "../../types/pokemonType";
 import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
 import "./singleGenerationPage.scss";
-import BackToTop from "../../components/BackToTop/BackToTop"
+import BackToTop from "../../components/BackToTop/BackToTop";
 
 function SingleGenerationPage() {
-    let navigate = useNavigate();
-    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const navigate = useNavigate();
+    const [pokemon, setPokemon] = useState<Pokemon[]>([]);
     const [loading, setLoading] = useState(true);
 
-    const {generation, pokemon} =
-        useParams<{ generation: string; pokemon?: string }>();
+    const { generation, chosenPokemon } = useParams<{ generation: string; chosenPokemon?: string }>();
+    const selectedPokemonRef = useRef<HTMLTableRowElement>(null);
 
     const handleOnClick = (redirectTarget: string) => {
-        pokemon === redirectTarget
-        ? navigate(`/${generation}`)
-        : navigate(`/${generation}/${redirectTarget}`);
+        chosenPokemon === redirectTarget ? navigate(`/${generation}`) : navigate(`/${generation}/${redirectTarget}`);
     };
+
     useEffect(() => {
-        const fetchData = async (
-            setLoading: React.Dispatch<React.SetStateAction<boolean>>
-        ) => {
+        if (chosenPokemon && selectedPokemonRef.current) {
+            selectedPokemonRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [loading]);
+
+    useEffect(() => {
+        const fetchData = async (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
             const data = await getSingleGeneration(setLoading, generation);
-            setPokemons(data);
+            setPokemon(data);
         };
         fetchData(setLoading);
     }, [generation]);
@@ -33,7 +35,7 @@ function SingleGenerationPage() {
     return (
         <div className="generationPage">
             {loading ? (
-                <LoadingIndicator/>
+                <LoadingIndicator />
             ) : (
                 <div>
                     <div className="generationNumber">Generation {generation}</div>
@@ -47,25 +49,24 @@ function SingleGenerationPage() {
                         </tr>
                         </thead>
                         <tbody>
-                        {pokemons.map((singlePokemon) => (
+                        {pokemon.map((singlePokemon) => (
                             <Fragment key={singlePokemon.id}>
                                 <tr
-                                    className={pokemon === singlePokemon.name ? "table__row_selected" : "table__row"}
-                                    onClick={() => handleOnClick(singlePokemon.name)}>
+                                    ref={chosenPokemon === singlePokemon.name ? selectedPokemonRef : null}
+                                    className={chosenPokemon === singlePokemon.name ? "table__row_selected" : "table__row"}
+                                    onClick={() => handleOnClick(singlePokemon.name)}
+                                >
                                     <td className="table__cell">
                                         {singlePokemon.name.charAt(0).toUpperCase() +
-                                            singlePokemon.name
-                                                .slice(1)
-                                                .replace("-m", " Male")
-                                                .replace("-f", " Female")}
+                                            singlePokemon.name.slice(1).replace("-m", " Male").replace("-f", " Female")}
                                     </td>
                                     <td className="table__cell">{singlePokemon.id}</td>
                                     <td className="table__cell">
-                                        <img loading="lazy" src={singlePokemon.image} alt="pokemon image"/>
+                                        <img loading="lazy" src={singlePokemon.image} alt="pokemon image" />
                                     </td>
                                     <td className="table__cell">{singlePokemon.types}</td>
                                 </tr>
-                                {pokemon === singlePokemon.name && (
+                                {chosenPokemon === singlePokemon.name && (
                                     <tr>
                                         <td colSpan={4}>
                                             <div className="table__details">
@@ -77,40 +78,24 @@ function SingleGenerationPage() {
                                                 />
                                                 <div className="table__stats">
                                                     <p className="table__detail">
-                                                        HP:{" "}
-                                                        <span className="table__detail-number">
-                                {singlePokemon.hp}
-                              </span>
+                                                        HP: <span className="table__detail-number">{singlePokemon.hp}</span>
                                                     </p>
                                                     <p className="table__detail">
-                                                        Attack:{" "}
-                                                        <span className="table__detail-number">
-                                {singlePokemon.attack}
-                              </span>
+                                                        Attack: <span className="table__detail-number">{singlePokemon.attack}</span>
                                                     </p>
                                                     <p className="table__detail">
-                                                        Defense:{" "}
-                                                        <span className="table__detail-number">
-                                {singlePokemon.defense}
-                              </span>
+                                                        Defense: <span className="table__detail-number">{singlePokemon.defense}</span>
                                                     </p>
                                                     <p className="table__detail">
                                                         Special Attack:{" "}
-                                                        <span className="table__detail-number">
-                                {singlePokemon.specialAttack}
-                              </span>
+                                                        <span className="table__detail-number">{singlePokemon.specialAttack}</span>
                                                     </p>
                                                     <p className="table__detail">
                                                         Special Defense:{" "}
-                                                        <span className="table__detail-number">
-                                {singlePokemon.specialDefense}
-                              </span>
+                                                        <span className="table__detail-number">{singlePokemon.specialDefense}</span>
                                                     </p>
                                                     <p className="table__detail">
-                                                        Speed:{" "}
-                                                        <span className="table__detail-number">
-                                {singlePokemon.speed}
-                              </span>
+                                                        Speed: <span className="table__detail-number">{singlePokemon.speed}</span>
                                                     </p>
                                                 </div>
                                             </div>
@@ -123,7 +108,7 @@ function SingleGenerationPage() {
                     </table>
                 </div>
             )}
-            <BackToTop/>
+            <BackToTop />
         </div>
     );
 }
