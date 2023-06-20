@@ -15,7 +15,7 @@ function Breadcrumbs() {
                     /generation-{generation}
                 </Link>
             )}
-            {pokemon && (
+            {singlePokemon && (
                 <Link className="breadcrumbs__link" to={`${generation}/${singlePokemon}`}>
                     /{singlePokemon}
                 </Link>
