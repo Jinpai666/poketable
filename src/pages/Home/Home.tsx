@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import getPokemonGenerations from "../services/getPokemonGenerations";
+import getPokemonGenerations from "../../services/getPokemonGenerations";
+import "./home.scss"
 
 type GenerationData = {
     name: string;
@@ -16,7 +17,7 @@ function Home() {
     }, []);
 
     return (
-        <div>
+        <div className="homepage">
             <h1>Choose pokemon type:</h1>
             <ul>
                 {generations.map((generation, idx) => {
