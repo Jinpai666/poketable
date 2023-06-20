@@ -8,7 +8,7 @@ function Breadcrumbs() {
     return (
         <div className="breadcrumbs">
             <Link className="breadcrumbs__link" to="/">
-                home
+                Home
             </Link>
             {generation && (
                 <Link className="breadcrumbs__link" to={`${generation}`}>

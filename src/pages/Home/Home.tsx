@@ -18,16 +18,17 @@ function Home() {
 
     return (
         <div className="homepage">
-            <h1>Choose pokemon type:</h1>
-            <ul>
+            <h1 className="homepage__welcome-title">Welcome to Poketable!</h1>
+            <h2 className="homepage__text">Choose a generation to see:</h2>
+            <ul className="homepage__list">
                 {generations.map((generation, idx) => {
                     const romanNumeral = generation.name.replace('generation-', '').toUpperCase();
                     const generationName = generation.name.replace('-', ' ').replace('g', 'G').slice(0,10);
                     const formattedName = `${generationName} ${romanNumeral}`;
 
                     return (
-                        <li key={idx}>
-                            <Link to={`/${idx+1}`}>
+                        <li className="homepage__list-item" key={idx}>
+                            <Link className="homepage__list-item_link"  to={`/${idx+1}`}>
                                 {formattedName}
                             </Link>
                         </li>

@@ -1,4 +1,30 @@
 .homepage{
   padding: 10px;
   font-family: 'Roboto', sans-serif;
+  text-align: center;
+
+  &__welcome-title{
+    font-size: 68px;
+  }
+  &__text{
+    margin: 30px 0;
+    font-size: 22px;
+  }
+  &__list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__list-item{
+    padding-bottom: 20px;
+    width: 150px;
+    transition: .5s;
+    &:hover{
+    scale: 1.2;
+    }
+  }
+  &__list-item_link{
+    text-decoration: none;
+    color: #000;
+  }
 }
