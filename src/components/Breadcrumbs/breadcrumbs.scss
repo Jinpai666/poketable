@@ -1,13 +1,19 @@
-.breadcrumbs{
+.breadcrumbs {
   padding: 10px 10px 0;
   font-size: 20px;
 
-  &__link{
+  &__link {
     font-family: "Roboto", sans-serif;
     text-transform: capitalize;
     text-decoration: none;
     color: #000;
     font-weight: 600;
+    transition: .4s;
+
+    &:hover {
+      color: #c62828;
+      transition: .4s;
+    }
 
   }
 }

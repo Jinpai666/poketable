@@ -38,7 +38,7 @@ function SingleGenerationPage() {
                 <LoadingIndicator />
             ) : (
                 <div>
-                    <div className="generationNumber">Generation {generation}</div>
+                    <h1 className="generationNumber">Generation {generation}</h1>
                     <table className="table">
                         <thead className="table__head">
                         <tr>
